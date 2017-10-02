@@ -143,12 +143,12 @@
       </b-jumbotron>
     </section>
 
-    <section id="results" v-if="collectionConfig.resultsComponent">
+    <section id="results" v-if="collectionConfig.results">
       <b-jumbotron :style="resultsStyle">
         <div class="container py-2 py-md-4 w-75 text-center">
-          <h3 class="display-5">Results</h3>
+          <h3 class="display-5">Browse Results</h3>
           <p class="lead my-2 my-md-3 text-sm-left">
-            As each {{ collectionConfig.terminology.task }} is completed,
+            As each {{ collectionConfig.terminology.task }} is completed, its
             {{ collectionConfig.terminology.taskRun | pluralize }} are
             analysed and the outcome provided via our results page, making
             the efforts of our volunteers immediately apparent.
