@@ -13,7 +13,7 @@
         :results="results"
         :favourites="favourites"
         :collectionConfig="collectionConfig"
-        @getresults="onGetResult"
+        @getresults="onGetResults"
         @putresult="onPutResult"
         @postfavourite="onPostFavourite"
         @delfavourite="onDelFavourite">
@@ -31,7 +31,7 @@ export default {
       description: `Browse results of ${this.collectionConfig.name} projects`,
       navItems: [],
       results: [],
-      favourites: Set()
+      favourites: []
     }
   },
 
