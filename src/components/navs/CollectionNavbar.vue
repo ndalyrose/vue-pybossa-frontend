@@ -67,7 +67,7 @@
             Discuss
           </b-nav-item>
           <b-nav-item
-            v-if="collectionConfig.resultsComponent"
+            v-if="collectionConfig.results"
             :to="{
               name: 'collection-results',
               params: {

@@ -8,6 +8,7 @@ import CollectionAbout from '@/pages/collection/About'
 import CollectionData from '@/pages/collection/Data'
 import CollectionContribute from '@/pages/collection/Contribute'
 import CollectionPresenter from '@/pages/collection/Presenter'
+import CollectionResults from '@/pages/collection/Results'
 
 const routes = [
   {
@@ -60,6 +61,17 @@ const routes = [
         ]
       },
       {
+        path: 'results',
+        component: FloatingTabsLayout,
+        children: [
+          {
+            path: '/',
+            name: 'collection-results',
+            component: CollectionResults
+          }
+        ]
+      },
+      {
         path: 'project/:shortname/presenter',
         component: FloatingTabsLayout,
         children: [
@@ -73,14 +85,5 @@ const routes = [
     ]
   }
 ]
-
-// Conditional routes (TODO: Update)
-// if (config.resultsComponent) {
-//   routes.push({
-//     path: '/collection/:collectionname/statistics',
-//     name: 'results',
-//     component: Collection
-//   })
-// }
 
 export default routes
