@@ -212,6 +212,32 @@ A `name` for the microsite.
 micrositeConfig.name = 'My Amazing Name'
 ```
 
+### results
+
+The `results` component can be used to browse or update the results for a microsite. If included in the configuration, links will appear in the microsite navbar and homepage.
+
+```js
+micrositeConfig.results = require('/Results.vue')
+```
+
+The component will be passed the following properties:
+
+| Property          | Type   | Description                                        |
+|-------------------|--------|----------------------------------------------------|
+| current-user      | Object | The user currently logged in to the site           |
+| favourites        | Array  | The current user's favourites (if any)             |
+| results           | Array  | The results currently in scope                     |
+| collection-config | Object | The microsite configuration                        |
+
+It listens for to the following events:
+
+| Event             | Arguments          | Description                                              |
+|-------------------|--------------------|----------------------------------------------------------|
+| getresults        | `query`            | Retrieve a list of results from `/api/results?${query}`  |
+| putresult         | `data`, `resultId` | Update the result with ID `resultId`, using `data`       |
+| postfavourite     | `taskId`           | Add the task to the user's favourites                    |
+| delfavourite      | `taskId`           | Delete the task with `taskId` from the user's favourites |
+
 ### tagline
 
 The `tagline` will appear on the microsite homepage.
