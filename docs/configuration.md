@@ -226,6 +226,7 @@ The component will be passed the following properties:
 |-------------------|--------|----------------------------------------------------|
 | current-user      | Object | The user currently logged in to the site           |
 | favourites        | Array  | The current user's favourites (if any)             |
+| categories        | Array  | The categories for this microsite                  |
 | results           | Array  | The results currently in scope                     |
 | collection-config | Object | The microsite configuration                        |
 

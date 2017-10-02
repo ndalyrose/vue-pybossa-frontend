@@ -10,6 +10,7 @@
         :is="collectionConfig.results"
         v-else
         :currentUser="currentUser"
+        :categories="categories"
         :results="results"
         :favourites="favourites"
         :collectionConfig="collectionConfig"
@@ -29,6 +30,7 @@ export default {
   data: function () {
     return {
       description: `Browse results of ${this.collectionConfig.name} projects`,
+      categories: [],
       navItems: [],
       results: [],
       favourites: []
@@ -59,6 +61,16 @@ export default {
   },
 
   methods: {
+    /**
+     * Set core data.
+     * @param {Object} data
+     *   The data.
+     */
+    setData (data) {
+      console.log(data)
+      this.categories = data.categories
+    },
+
     /**
      * Handle an error.
      * @param {Object} error
@@ -123,6 +135,33 @@ export default {
         this.handleError(err)
       })
     }
+  },
+
+  beforeRouteEnter (to, from, next) {
+    let key = to.params.collectionname
+    pybossaApi.get('/').then(r => {
+      console.log(r)
+      r.data = {
+        categories: r.data.filter(category => {
+          return category.info.collection === key
+        })
+      }
+      next(vm => vm.setData(r.data))
+    })
+  },
+
+  beforeRouteUpdate (to, from, next) {
+    let key = to.params.collectionname
+    pybossaApi.get('/').then(r => {
+      console.log(r)
+      r.data = {
+        categories: r.data.filter(category => {
+          return category.info.collection === key
+        })
+      }
+      this.setData(r.data)
+      next()
+    })
   },
 
   mounted () {
