@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import pybossaApi from '@/api/pybossa'
+
 export default {
   data: function () {
     return {
@@ -64,10 +66,10 @@ export default {
      */
     handleError (error) {
       this.$store.dispatch('NOTIFY', {
-        msg: err.exception_msg,
+        msg: error.exception_msg || error,
         type: 'danger'
       })
-      throw new Error(err)
+      throw new Error(error)
     },
 
     /**
@@ -78,7 +80,9 @@ export default {
     onGetResults (query) {
       pybossaApi.post(`/api/results?${query}`).then(r => {
         this.results = r.data
-      }).catch(err => handleError)
+      }).catch(err => {
+        this.handleError(err)
+      })
     },
 
     /**
@@ -86,10 +90,12 @@ export default {
      * @param {Object} data
      *   The data.
      */
-    onPutResult (query) {
+    onPutResult (data) {
       pybossaApi.put(`/api/results`, data).then(r => {
         this.results = r.data
-      }).catch(err => handleError)
+      }).catch(err => {
+        this.handleError(err)
+      })
     },
 
     /**
@@ -99,8 +105,10 @@ export default {
      */
     onPostFavourite (taskId) {
       pybossaApi.post(`/api/favorites`, { task_id: taskId }).then(() => {
-        favourites.add(taskId)
-      }).catch(err => handleError)
+        this.favourites.add(taskId)
+      }).catch(err => {
+        this.handleError(err)
+      })
     },
 
     /**
@@ -110,8 +118,10 @@ export default {
      */
     onDelFavourite (taskId) {
       pybossaApi.delete(`/api/favorites/${taskId}`).then(() => {
-        favourites.delete(taskId)
-      }).catch(err => handleError)
+        this.favourites.delete(taskId)
+      }).catch(err => {
+        this.handleError(err)
+      })
     }
   },
 
